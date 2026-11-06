@@ -1,0 +1,6 @@
+(function(){let e;async function t(e,t){t(`正在准备 CPython 浏览器运行环境，首次按需加载。`);let{loadPyodide:n}=await import(
+/* @vite-ignore */
+new URL(`python/pyodide.mjs`,e).href),r=await n({indexURL:new URL(`python/`,e).href}),i=await fetch(new URL(`python-tracer.py`,e));if(!i.ok)throw Error(`Python 追踪组件未能载入。`);r.globals.set(`_astra_helper_source`,await i.text()),await r.runPythonAsync(`import types
+_astra_runtime=types.ModuleType("_astra_runtime")
+exec(compile(_astra_helper_source,"<astra-runtime>","exec"),_astra_runtime.__dict__)
+del _astra_helper_source`);let a=await r.runPythonAsync(`_astra_runtime.trace_json`);if(typeof a!=`function`)throw Error(`Python 追踪入口不是可调用对象。`);return a}self.onmessage=async({data:n})=>{let r=e=>self.postMessage({type:`progress`,message:e});try{let i=await(e||=t(n.runtimeBase,r));self.postMessage({type:`progress`,phase:`execute`,message:`正在 CPython 中运行并采集对象与调用状态…`});let a=JSON.parse(i(n.code,n.input||``,n.maxFrames||1800,e=>self.postMessage({type:`frame`,frame:JSON.parse(e)}),JSON.stringify(n.files||{})));a.error||delete a.error,self.postMessage({type:`result`,result:a})}catch(e){self.postMessage({type:`result`,fatal:!0,result:{frames:[],stdout:``,error:String(e),elapsed:0}})}}})();

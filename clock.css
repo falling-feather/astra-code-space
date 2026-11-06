@@ -1,0 +1,223 @@
+:root {
+  color-scheme: dark;
+  background: #050d21;
+  color: #f2f6ff;
+  font-family: "Microsoft YaHei UI", "PingFang SC", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+.clock {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  overflow: clip;
+  background:
+    radial-gradient(ellipse at 56% 5%, #0b1e3d 0%, transparent 65%),
+    linear-gradient(#060f25, #050d21 72%, #080f24);
+}
+
+.clock-stage {
+  position: relative;
+  width: min(100%, calc(100svh * 1672 / 941));
+  isolation: isolate;
+  container-type: inline-size;
+}
+
+.clock-face {
+  position: relative;
+  overflow: clip;
+  aspect-ratio: 1672 / 941;
+}
+
+.clock-art,
+.clock-motion,
+.clock-atmosphere {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.clock-atmosphere {
+  z-index: 2;
+}
+
+@media (max-aspect-ratio: 3/2) {
+  .clock-art,
+  .clock-motion {
+    mask-image: linear-gradient(transparent, black 3.7%, black 97%, transparent);
+  }
+}
+
+.clock-nav {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.clock-entry {
+  position: absolute;
+  left: calc((var(--x) + var(--shift-x, 0)) * 100% / 1672);
+  top: calc((var(--y) + var(--shift-y, 0)) * 100% / 941);
+  width: calc(var(--w) * 100% / 1672);
+  height: calc(var(--h) * 100% / 941);
+  color: #fff4e4;
+  pointer-events: auto;
+  text-decoration: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.entry-label {
+  position: absolute;
+  left: calc(var(--label-x) * 100% / var(--w));
+  top: calc(var(--label-y) * 100% / var(--h));
+  transform: translate(-50%, -50%);
+  font-size: clamp(14px, 1.91cqw, 36px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .025em;
+  text-shadow: 0 2px 4px #020b22, 0 0 14px #061431;
+  white-space: nowrap;
+}
+
+.clock-entry:is(:hover, :focus-visible, [data-engaged]) .entry-label {
+  color: #ffe5ad;
+  text-shadow: 0 2px 6px #020b22, 0 0 13px #e3a558b0;
+}
+
+.clock-marker {
+  color: #d2dfec;
+}
+
+.clock-marker:is([data-highlight], [data-engaged]) {
+  color: #ffe6b3;
+}
+
+.clock-marker:is([data-highlight], [data-engaged]) .index-knob {
+  filter: drop-shadow(0 0 4px #ffe2a6a8);
+}
+
+.clock-entry:focus-visible,
+.motion-toggle:focus-visible {
+  outline: 1px solid #ffe4b4;
+  outline-offset: 3px;
+}
+
+.trail-color {
+  stop-color: #cee7ff;
+}
+
+.clock-trail {
+  opacity: .45;
+}
+
+.hand-tip {
+  opacity: .42;
+}
+
+.tip-rays,
+.detent-flash {
+  opacity: 0;
+}
+
+.clock-stage[data-motion="turning"] .clock-trail,
+.clock-stage[data-motion="turning"] .hand-tip {
+  opacity: .85;
+}
+
+.clock-stage[data-motion="turning"] .trail-color {
+  stop-color: #ffe2ab;
+}
+
+.clock-stage[data-motion="arrived"] .hand-tip,
+.clock-stage[data-motion="arrived"] .tip-rays {
+  opacity: 1;
+}
+
+.clock-stage[data-motion="arrived"] .detent-flash {
+  animation: engage .2s ease-out both;
+}
+
+.clock-stage[data-motion="paused"] .hand-tip {
+  opacity: .22;
+}
+
+@keyframes engage {
+  from { opacity: .96; }
+  to { opacity: .24; }
+}
+
+.motion-toggle {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  z-index: 1;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #d7e7ff9e;
+  cursor: pointer;
+}
+
+.motion-toggle[hidden] { display: none; }
+.motion-toggle:hover { color: #fff3d8; }
+
+.motion-toggle::before {
+  width: 9px;
+  height: 13px;
+  border-inline: 1.5px solid currentColor;
+  content: "";
+}
+
+.motion-toggle[aria-pressed="true"]::before {
+  width: 10px;
+  height: 13px;
+  border: 0;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .clock-nav {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px 15px;
+    padding: 14px 14px 4px;
+  }
+
+  .clock-entry {
+    position: static;
+    display: grid;
+    width: auto;
+    min-width: 44px;
+    height: 44px;
+    place-items: center;
+    color: #eef5ff;
+  }
+
+  .entry-label {
+    position: static;
+    transform: none;
+    font-size: .9rem;
+  }
+}

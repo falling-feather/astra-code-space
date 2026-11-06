@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050d21">
+  <title>星序 Astra · 代码空间</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23ffe5b2' d='M16 1 19 13 31 16 19 19 16 31 13 19 1 16 13 13Z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./clock.css">
+  <script type="module" src="./clock.js"></script>
+</head>
+<body>
+  <main class="clock" aria-labelledby="title">
+    <h1 class="sr-only" id="title">星序 Astra · 代码空间</h1>
+    <div class="clock-stage">
+      <div class="clock-face">
+        <img class="clock-art" src="./assets/clock-face.png" width="1672" height="941" alt="" fetchpriority="high" draggable="false">
+        <svg class="clock-motion" viewBox="0 0 1672 941" aria-hidden="true">
+          <defs>
+            <path id="blade" fill-rule="evenodd" d="M 0 -7 L .157 -9 .222 -15 Q .249 -18 .28 -13 L .315 -8 .949 -2 1 0 .949 3 .315 8 .28 12 Q .249 18 .222 15 L .158 10 0 8 Z M .209 0 Q .244 -11 .284 0 Q .244 11 .209 0 Z"/>
+            <linearGradient id="blade-metal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#557596"/>
+              <stop offset=".17" stop-color="#effaff"/>
+              <stop offset=".41" stop-color="#b5c8df"/>
+              <stop offset=".54" stop-color="#536b8a"/>
+              <stop offset=".70" stop-color="#d3e4f5"/>
+              <stop offset="1" stop-color="#8ca4c3"/>
+            </linearGradient>
+            <linearGradient id="sweep-light" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#9cceff" stop-opacity="0"/>
+              <stop offset=".72" class="trail-color" stop-opacity=".38"/>
+              <stop offset="1" class="trail-color" stop-opacity=".9"/>
+            </linearGradient>
+            <radialGradient id="tip-light">
+              <stop offset="0" stop-color="#fff8e4"/>
+              <stop offset=".23" stop-color="#ffe0aa" stop-opacity=".70"/>
+              <stop offset=".55" stop-color="#9ecbff" stop-opacity=".23"/>
+              <stop offset="1" stop-color="#9ecbff" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="index-metal" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#dce9f5"/>
+              <stop offset=".43" stop-color="#8da4c0"/>
+              <stop offset="1" stop-color="#344d71"/>
+            </linearGradient>
+            <g id="index-crystal">
+              <path d="M -17 -12 -5 -26 15 -19 19 -2 0 8 -13 4 Z" fill="url(#index-metal)" stroke="#d1dfed" stroke-width="1.3"/>
+              <path d="M -5 -26 0 8 -17 -12 Z" fill="#7590b4"/>
+              <path d="M -5 -26 15 -19 0 8 Z" fill="#e8f1fa" fill-opacity=".78"/>
+              <path d="M 15 -19 19 -2 0 8 Z" fill="#2b4061"/>
+              <path d="M -5 -26 0 8 15 -19" fill="none" stroke="#fff8e8" stroke-opacity=".8" stroke-width="1.1"/>
+            </g>
+            <mask id="hub-occlusion" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941">
+              <rect width="1672" height="941" fill="white"/>
+              <path d="M 388 509 Q 419 487 471 503 Q 502 513 515 546 Q 519 579 477 590 Q 418 606 383 572 Q 374 543 388 509Z"/>
+              <path d="M 344 472 C 348 521 404 554 469 552 C 512 550 541 525 549 499 C 556 470 522 439 475 428 C 427 413 370 435 352 456" fill="none" stroke="black" stroke-width="6"/>
+            </mask>
+            <mask id="gear-occlusion" maskUnits="userSpaceOnUse" x="0" y="0" width="1672" height="941">
+              <rect width="1672" height="941" fill="white"/>
+              <path d="M 0 509 C 125 690 340 817 611 897 L 900 941 H 0 Z"/>
+              <path d="M 265 575 C 270 533 332 500 398 497 C 469 492 544 532 566 580 C 591 627 579 674 540 687 C 488 704 415 694 351 675 C 297 659 251 621 265 575 Z"/>
+              <path d="M 151 377 L 363 547 M 140 666 L 287 626 M 507 676 L 639 826" fill="none" stroke="black" stroke-width="12"/>
+              <path d="M 369 673 L 300 775 M 561 598 L 709 645" fill="none" stroke="black" stroke-width="21"/>
+              <path d="M 105 474 C 206 374 375 405 503 463 S 706 591 695 678 C 687 736 621 796 530 813" fill="none" stroke="black" stroke-width="22"/>
+              <path d="M 343 469 C 350 519 402 554 468 552 C 515 550 542 524 550 499 C 556 469 519 437 475 428 C 429 414 375 433 352 455" fill="none" stroke="black" stroke-width="7"/>
+            </mask>
+          </defs>
+          <!-- Each segment starts at the inner end of its engraved tick. -->
+          <g visibility="hidden">
+            <path data-orbit="python" data-notch="406 138" d="M 386 190 C 481 191 576 214 671 242"/>
+            <path data-orbit="c" data-notch="708 187" d="M 671 242 C 764 269 853 303 935 337"/>
+            <path data-orbit="java" data-notch="983 282" d="M 935 337 C 1030 379 1132 444 1204 508"/>
+            <path data-orbit="trace" data-notch="1271 450" d="M 1204 508 C 1265 562 1320 626 1355 682"/>
+            <path data-orbit="algorithms" data-notch="1390 668" d="M 1355 682 C 1460 845 1503 1020 1258 1112 C 963 1223 399 1197 -15 1008 C -382 842 -482 539 -262 335 C -117 202 125 186 386 190"/>
+          </g>
+          <g mask="url(#gear-occlusion)">
+            <g class="gear-train" transform="matrix(1 .19 -.09 .575 380 622)"></g>
+          </g>
+          <g class="clock-markers"></g>
+          <path class="clock-trail" fill="none" stroke="url(#sweep-light)" stroke-width="2.5" stroke-linecap="round"/>
+          <g mask="url(#hub-occlusion)">
+            <g transform="translate(0 5)">
+              <use class="hand-shadow" href="#blade" fill="#030a1e" opacity=".72"/>
+            </g>
+            <g class="hand" transform="matrix(758 -33 .0435 .999 446 541)">
+              <use href="#blade" fill="url(#blade-metal)"/>
+              <path d="M .03 -6 L .157 -9 .222 -15 Q .249 -18 .28 -13 L .315 -8 .949 -2 1 0" fill="none" stroke="#f4faff" stroke-opacity=".84" stroke-width="1.45" vector-effect="non-scaling-stroke"/>
+            </g>
+          </g>
+          <g class="hand-tip" transform="translate(1204 508)">
+            <circle r="29" fill="url(#tip-light)"/>
+            <path class="tip-rays" d="M -24 0 H 24 M 0 -10 V 10" fill="none" stroke="#fff1d1" stroke-width="1.1"/>
+            <circle r="2.2" fill="#fff3d8"/>
+          </g>
+          <g class="detent-flash">
+            <path class="detent-tick" fill="none" stroke="#fff0c9" stroke-width="3" stroke-linecap="round"/>
+            <circle class="detent-glint" r="52" fill="url(#tip-light)"/>
+          </g>
+        </svg>
+        <button class="motion-toggle" type="button" aria-label="暂停动效" aria-pressed="false" title="暂停动效" hidden></button>
+      </div>
+      <nav class="clock-nav" aria-label="代码空间入口">
+        <a class="clock-entry" data-stop="python" style="--x:374; --y:89; --w:188; --h:111; --label-x:114; --label-y:67" href="./study/#/learn/python"><span class="entry-label">Python</span></a>
+        <a class="clock-entry" data-stop="c" style="--x:655; --y:140; --w:186; --h:114; --label-x:118; --label-y:75" href="./study/#/learn/c"><span class="entry-label">C 语言</span></a>
+        <a class="clock-entry" data-stop="java" style="--x:922; --y:232; --w:182; --h:116; --label-x:119; --label-y:88" href="./study/#/learn/java"><span class="entry-label">Java</span></a>
+        <a class="clock-entry" data-stop="trace" style="--x:1189; --y:400; --w:233; --h:122; --label-x:146; --label-y:98" href="./study/#/trace/c/functions"><span class="entry-label">程序追踪</span></a>
+        <a class="clock-entry" data-stop="algorithms" style="--x:1340; --y:626; --w:223; --h:113; --label-x:137; --label-y:83" href="./study/#/algorithms"><span class="entry-label">算法空间</span></a>
+      </nav>
+    </div>
+    <canvas class="clock-atmosphere" width="1672" height="941" aria-hidden="true"></canvas>
+    <p class="sr-only" role="status" id="clock-status"></p>
+  </main>
+</body>
+</html>
