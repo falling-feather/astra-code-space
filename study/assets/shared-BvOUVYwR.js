@@ -1,0 +1,1 @@
+import{n as e}from"./index-DwE7oWR3.js";function t(t){return`<div class="breadcrumb"><a href="#/">代码空间</a>${t.map(t=>`<span>/</span><span>${e(t)}</span>`).join(``)}</div>`}export{t};
