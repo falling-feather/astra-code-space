@@ -1,0 +1,2 @@
+function e(e,t){let n=e.map((e,n)=>t[n]===null||t[n]===void 0?null:t[n]===e.answer);return{correct:n.filter(e=>e===!0).length,total:e.length,answered:n.filter(e=>e!==null).length,results:n}}var t=e=>e.replace(/\r\n/g,`
+`).replace(/\n$/,``),n=(e,n)=>t(e)===t(n);function r(e,t){let r=n(t.stdout,e.output),i=Object.entries(e.expectedFiles||{}).filter(([e,r])=>t.files?.[e]===void 0||!n(t.files[e],r)).map(([e])=>e);return{passed:!t.error&&r&&i.length===0,outputMatches:r,missingFiles:i}}export{n,r,e as t};
